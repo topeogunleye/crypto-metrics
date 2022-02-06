@@ -13,7 +13,7 @@ Additional description about the project and its features.
 
 ## Built With
 
-- HTML, JavaScript
+- React & Redux
 - Stylelint, Web Hint, Lighthouse
 - Eslint, Prettier
 
