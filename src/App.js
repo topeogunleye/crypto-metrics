@@ -1,24 +1,25 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import Details from './components/pages/Details';
 import Home from './components/pages/Home';
 import './App.css';
 import Header from './components/Header';
+import { fetchCryptos } from './redux/crypto/crypto';
+import { CryptoState } from './CryptoContext';
 
 function App() {
-  const useStyles = makeStyles(() => ({
-    App: {
-      backgroundColor: '#3f51b5',
-      color: 'white',
-      minHeight: '100vh',
-    },
-  }));
+  const dispatch = useDispatch();
 
-  const classes = useStyles();
+  const currency = CryptoState();
+
+  useEffect(() => {
+    dispatch(fetchCryptos(currency.currency));
+  }, []);
 
   return (
     <BrowserRouter>
-      <div className={classes.App}>
+      <div>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
