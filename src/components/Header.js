@@ -3,6 +3,7 @@
 import { CogIcon, MicrophoneIcon, SearchIcon } from '@heroicons/react/solid';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { filterCryptos } from '../redux/crypto/crypto';
 
 export default function Header() {
@@ -12,7 +13,7 @@ export default function Header() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     console.log(search);
     dispatch(filterCryptos(cryptos, search));
   };
@@ -21,13 +22,9 @@ export default function Header() {
     <header className="bg-white border border-stone-200 shadow divide-y divide-stone-200">
       <div className="py-2 px-8 max-w-7xl mx-auto md:flex items-center justify-between space-x-4 space-y-4 md:space-y-0">
         <div className="">
-          <a href="../index.html">
-            <img
-              className="h-8 w-auto logoYummy"
-              src="./yummly.svg"
-              alt="Yummy Yums"
-            />
-          </a>
+          <Link to="/">
+            <h1 className="text-2xl font-bold text-gray-900">Crypto Tracker</h1>
+          </Link>
         </div>
 
         <div id="meals-counter" />
