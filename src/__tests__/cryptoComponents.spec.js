@@ -7,8 +7,6 @@ import mockCryptos from '../__mocks__/mockCryptos.js';
 
 import configureStore from 'redux-mock-store';
 
-import Home from '../components/pages/Home';
-
 const mockStore = configureStore([]);
 
 describe('My Connected React-Redux Component', () => {
@@ -22,7 +20,7 @@ describe('My Connected React-Redux Component', () => {
 
     component = renderer.create(
       <Provider store={store}>
-        <mockCryptos/>
+        <mockCryptos />
       </Provider>
     );
   });
