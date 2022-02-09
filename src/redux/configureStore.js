@@ -1,10 +1,10 @@
 import thunk from 'redux-thunk';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { cryptoDetailsReducer, cryptosReducer } from './crypto/crypto';
+import { cryptosReducer, cryptoHistoryReducer } from './crypto/crypto';
 
 const reducer = combineReducers({
   cryptosReducer,
-  cryptoDetailsReducer,
+  cryptoHistoryReducer,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));
