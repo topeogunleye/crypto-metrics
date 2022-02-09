@@ -14,7 +14,6 @@ export default function Header() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(search);
     dispatch(filterCryptos(cryptos, search));
   };
 

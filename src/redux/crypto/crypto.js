@@ -39,12 +39,10 @@ export const fetchCryptos = (currency) => (dispatch) => {
 
 /* eslint-disable consistent-return */
 export const filterCryptos = (cryptos, search) => (dispatch) => {
-  console.log(search);
   if (!search) return cryptos;
   const filteredCryptos = cryptos
     .filter((crypto) => crypto.name.toLowerCase().includes(search.toLowerCase()));
 
-  console.log(filteredCryptos);
   dispatch(loadCryptos(filteredCryptos));
 };
 

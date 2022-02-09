@@ -43,7 +43,6 @@ function Details() {
           },
         }),
       ]);
-      console.log(day);
 
       setCoinData({
         day: formatData(day.data.prices),
