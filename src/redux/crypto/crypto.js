@@ -37,53 +37,16 @@ export const fetchCryptos = (currency) => (dispatch) => {
     .catch(() => {});
 };
 
+/* eslint-disable consistent-return */
 export const filterCryptos = (cryptos, search) => (dispatch) => {
   console.log(search);
   if (!search) return cryptos;
-  const filteredCryptos = cryptos.filter((crypto) => crypto.name.toLowerCase().includes(search.toLowerCase()));
+  const filteredCryptos = cryptos
+    .filter((crypto) => crypto.name.toLowerCase().includes(search.toLowerCase()));
 
   console.log(filteredCryptos);
   dispatch(loadCryptos(filteredCryptos));
 };
-
-// export const fetchHistoricalData = (id) => (dispatch) => {
-//   const [day, week, year, detail] = Promise.all([
-//     coinGecko.get(`/coins/${id}/market_chart/`, {
-//       params: {
-//         vs_currency: 'usd',
-//         days: '1',
-//       },
-//     }),
-//     coinGecko.get(`/coins/${id}/market_chart/`, {
-//       params: {
-//         vs_currency: 'usd',
-//         days: '7',
-//       },
-//     }),
-//     coinGecko.get(`/coins/${id}/market_chart/`, {
-//       params: {
-//         vs_currency: 'usd',
-//         days: '365',
-//       },
-//     }),
-//     coinGecko.get('/coins/markets/', {
-//       params: {
-//         vs_currency: 'usd',
-//         ids: id,
-//       },
-//     }),
-//   ]);
-//   console.log(day);
-
-//   dispatch(
-//     getHistoricalData({
-//       day: formatData(day.data.prices),
-//       week: formatData(week.data.prices),
-//       year: formatData(year.data.prices),
-//       detail: detail.data[0],
-//     })
-//   );
-// };
 
 const initialState = {
   cryptos: [],
@@ -112,7 +75,9 @@ export const cryptosReducer = (state = initialState, action) => {
       };
     case LOAD_FILTERED_CRYPTOS:
       return {
-        cryptos: action.payload.filter((crypto) => crypto.name.toLowerCase().includes(action.payload.search.toLowerCase())),
+        cryptos: action.payload
+          .filter((crypto) => crypto.name.toLowerCase()
+            .includes(action.payload.search.toLowerCase())),
       };
     default:
       return state;

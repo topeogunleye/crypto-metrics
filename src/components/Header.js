@@ -29,7 +29,7 @@ export default function Header() {
 
         <div id="meals-counter" />
 
-        <form id="submit" onKeyUp={handleSubmit}>
+        <form id="submit">
           <div className="relative text-gray-600 focus-within:text-gray-400">
             <span className="absolute inset-y-0 left-0 flex items-center pl-2">
               <button
@@ -47,6 +47,7 @@ export default function Header() {
               autoComplete="off"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              onKeyUp={handleSubmit}
             />
           </div>
         </form>

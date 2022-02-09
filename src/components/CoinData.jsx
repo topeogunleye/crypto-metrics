@@ -1,6 +1,8 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const CoinData = ({ data }) => {
+  /* eslint-disable consistent-return */
   const renderData = () => {
     if (data) {
       return (
@@ -50,6 +52,10 @@ const CoinData = ({ data }) => {
   };
 
   return <div>{renderData()}</div>;
+};
+
+CoinData.propTypes = {
+  data: PropTypes.string.isRequired,
 };
 
 export default CoinData;

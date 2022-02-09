@@ -5,7 +5,9 @@ import historyOptions from '../chartConfigs/chartConfigs';
 
 const HistoryChart = ({ data }) => {
   const chartRef = useRef();
-  const { day, week, year, detail } = data;
+  const {
+    day, week, year, detail,
+  } = data;
   const [timeFormat, setTimeFormat] = useState('24h');
 
   const determineTimeFormat = () => {
@@ -23,8 +25,8 @@ const HistoryChart = ({ data }) => {
 
   useEffect(() => {
     if (chartRef && chartRef.current && detail) {
-      console.log('yeah');
-      const chartInstance = new Chartjs(chartRef.current, {
+      /* eslint-disable no-new */
+      new Chartjs(chartRef.current, {
         type: 'line',
         data: {
           datasets: [
@@ -44,11 +46,15 @@ const HistoryChart = ({ data }) => {
     }
   });
 
+  /* eslint-disable consistent-return */
   const renderPrice = () => {
     if (detail) {
       return (
         <>
-          <p className="my-0">${detail.current_price.toFixed(2)}</p>
+          <p className="my-0">
+            $
+            {detail.current_price.toFixed(2)}
+          </p>
           <p
             className={
               detail.price_change_24h < 0
@@ -56,7 +62,8 @@ const HistoryChart = ({ data }) => {
                 : 'text-success my-0'
             }
           >
-            {detail.price_change_percentage_24h.toFixed(2)}%
+            {detail.price_change_percentage_24h.toFixed(2)}
+            %
           </p>
         </>
       );
@@ -66,24 +73,27 @@ const HistoryChart = ({ data }) => {
     <div className="bg-white border mt-2 rounded p-3">
       <div>{renderPrice()}</div>
       <div>
-        <canvas ref={chartRef} id="myChart" width={250} height={250}></canvas>
+        <canvas ref={chartRef} id="myChart" width={250} height={250} />
       </div>
 
       <div className="chart-button mt-1">
         <button
           onClick={() => setTimeFormat('24h')}
+          type="button"
           className="btn btn-outline-secondary btn-sm"
         >
           24h
         </button>
         <button
           onClick={() => setTimeFormat('7d')}
+          type="button"
           className="btn btn-outline-secondary btn-sm mx-1"
         >
           7d
         </button>
         <button
           onClick={() => setTimeFormat('1y')}
+          type="button"
           className="btn btn-outline-secondary btn-sm"
         >
           1y
@@ -94,7 +104,7 @@ const HistoryChart = ({ data }) => {
 };
 
 HistoryChart.propTypes = {
-  data: propTypes.object.isRequired,
+  data: propTypes.string.isRequired,
 };
 
 export default HistoryChart;
