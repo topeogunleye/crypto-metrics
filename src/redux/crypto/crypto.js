@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const LOAD_CRYPTOS = 'LOAD_CRYPTOS';
 const LOAD_FILTERED_CRYPTOS = 'LOAD_FILTERED_CRYPTOS';
-const SINGLE_CRYPTO_DETAILS = 'SINGLE_CRYPTO_DETAILS';
+const GET_HISTORICAL_DATA = 'GET_HISTORICAL_DATA';
 
 export const loadCryptos = (payload) => ({
   type: LOAD_CRYPTOS,
@@ -14,8 +14,8 @@ export const loadFilteredCryptos = (payload) => ({
   payload,
 });
 
-export const singleCryptoDetails = (payload) => ({
-  type: SINGLE_CRYPTO_DETAILS,
+export const getHistoricalData = (payload) => ({
+  type: GET_HISTORICAL_DATA,
   payload,
 });
 
@@ -42,37 +42,62 @@ export const filterCryptos = (cryptos, search) => (dispatch) => {
   if (!search) return cryptos;
   const filteredCryptos = cryptos.filter((crypto) => crypto.name.toLowerCase().includes(search.toLowerCase()));
 
+  console.log(filteredCryptos);
   dispatch(loadCryptos(filteredCryptos));
 };
 
-export const fetchCryptoDetails = (id) => (dispatch) => {
-  console.log(id);
-  axios
-    .get(SingleCoin(id))
-    .then((response) => {
-      console.log(response.data);
-      const crypto = response.data;
-      dispatch(singleCryptoDetails(crypto));
-    })
-    .catch(() => {});
-};
+// export const fetchHistoricalData = (id) => (dispatch) => {
+//   const [day, week, year, detail] = Promise.all([
+//     coinGecko.get(`/coins/${id}/market_chart/`, {
+//       params: {
+//         vs_currency: 'usd',
+//         days: '1',
+//       },
+//     }),
+//     coinGecko.get(`/coins/${id}/market_chart/`, {
+//       params: {
+//         vs_currency: 'usd',
+//         days: '7',
+//       },
+//     }),
+//     coinGecko.get(`/coins/${id}/market_chart/`, {
+//       params: {
+//         vs_currency: 'usd',
+//         days: '365',
+//       },
+//     }),
+//     coinGecko.get('/coins/markets/', {
+//       params: {
+//         vs_currency: 'usd',
+//         ids: id,
+//       },
+//     }),
+//   ]);
+//   console.log(day);
+
+//   dispatch(
+//     getHistoricalData({
+//       day: formatData(day.data.prices),
+//       week: formatData(week.data.prices),
+//       year: formatData(year.data.prices),
+//       detail: detail.data[0],
+//     })
+//   );
+// };
 
 const initialState = {
   cryptos: [],
 };
 
-const initCryptoDetailsState = {
-  crypto: {},
+const initHistoricalData = {
+  history: {},
 };
 
-export const cryptoDetailsReducer = (
-  state = initCryptoDetailsState,
-  action,
-) => {
+export const cryptoHistoryReducer = (state = initHistoricalData, action) => {
   switch (action.type) {
-    case SINGLE_CRYPTO_DETAILS:
+    case GET_HISTORICAL_DATA:
       return {
-        crypto: action.payload,
+        history: action.payload,
       };
     default:
       return state;
@@ -87,7 +112,7 @@ export const cryptosReducer = (state = initialState, action) => {
       };
     case LOAD_FILTERED_CRYPTOS:
       return {
-        cryptos: action.payload,
+        cryptos: action.payload.filter((crypto) => crypto.name.toLowerCase().includes(action.payload.search.toLowerCase())),
       };
     default:
       return state;
