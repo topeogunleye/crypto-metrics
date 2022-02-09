@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 
 // mocks
 import configureStore from 'redux-mock-store';
-import mockCryptos from '../__mocks__/mockCryptos.js';
+import mockCryptos from '../__mocks__/mockCryptos';
 
 const mockStore = configureStore([]);
 
