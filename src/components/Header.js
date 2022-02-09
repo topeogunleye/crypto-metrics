@@ -10,7 +10,9 @@ export default function Header() {
   const cryptos = useSelector((state) => state.cryptosReducer.cryptos);
   const dispatch = useDispatch();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
     console.log(search);
     dispatch(filterCryptos(cryptos, search));
   };
@@ -30,7 +32,7 @@ export default function Header() {
 
         <div id="meals-counter" />
 
-        <form id="submit" onClick={handleSubmit}>
+        <form id="submit" onKeyUp={handleSubmit}>
           <div className="relative text-gray-600 focus-within:text-gray-400">
             <span className="absolute inset-y-0 left-0 flex items-center pl-2">
               <button
