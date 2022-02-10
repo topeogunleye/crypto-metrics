@@ -4,10 +4,9 @@ A meal finder app that pulls from TheMealDB API to allow users to search for, vi
 
 # crypto-metrics
 
-> A meal finder app that pulls from TheMealDB API to allow users to search for, view recipes, and comment on recipes.
 > A crypto metrics app that pulls from the CoinGecko api to allow users view the various types of crypto currencies, view the current value and value history of crypto currencies.
 
-![screenshot](./sec.png)
+![screenshot](./src/screenshot.png)
 
 Additional description about the project and its features.
 
@@ -19,7 +18,7 @@ Additional description about the project and its features.
 
 ## Video Demo
 
-[Video Demo](https://www.loom.com/share/86a73ca9798443a2af325321d206d7ab)
+[Video Demo](https://loom.com/share/c3940bcff9ff4c5faab823ddab2d9420)
 ## Live Demo
 
 [Live Demo Link](https://cryptometricmicroverse.netlify.app/)

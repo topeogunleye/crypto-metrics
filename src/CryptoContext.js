@@ -10,7 +10,7 @@ const CryptoContext = ({ children }) => {
   const [symbol, setSymbol] = useState('₦');
 
   useEffect(() => {
-    if (currency === 'NGN') setSymbol('₦”');
+    if (currency === 'NGN') setSymbol('₦');
     else if (currency === 'USD') setSymbol('$');
   }, [currency]);
 

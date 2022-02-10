@@ -1,77 +1,61 @@
-import {
-  AppBar,
-  Container,
-  MenuItem,
-  Select,
-  Toolbar,
-  Typography,
-} from '@material-ui/core';
-import MicIcon from '@material-ui/icons/Mic';
-import SettingsIcon from '@material-ui/icons/Settings';
-import {
-  createTheme,
-  makeStyles,
-  ThemeProvider,
-} from '@material-ui/core/styles';
-import { useNavigate } from 'react-router-dom';
-import { CryptoState } from '../CryptoContext';
+/* This example requires Tailwind CSS v2.0+ */
 
-const useStyles = makeStyles(() => ({
-  title: {
-    flex: 1,
-    color: 'gold',
-    fontFamily: 'Montserrat',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-  },
-}));
+import { CogIcon, MicrophoneIcon, SearchIcon } from '@heroicons/react/solid';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { filterCryptos } from '../redux/crypto/crypto';
 
-const darkTheme = createTheme({
-  palette: {
-    primary: {
-      main: '#fff',
-    },
-    type: 'dark',
-  },
-});
+export default function Header() {
+  const [search, setSearch] = useState('');
+  const cryptos = useSelector((state) => state.cryptosReducer.cryptos);
+  const dispatch = useDispatch();
 
-function Header() {
-  const classes = useStyles();
-  const { currency, setCurrency } = CryptoState();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const navigate = useNavigate();
+    dispatch(filterCryptos(cryptos, search));
+  };
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <AppBar color="transparent" position="static">
-        <Container>
-          <Toolbar>
-            <Typography
-              onClick={() => navigate('/')}
-              variant="h6"
-              className={classes.title}
-            >
-              Crypto Metrics
-            </Typography>
-            {/* <Button color="inherit">Login</Button> */}
-            <MicIcon style={{ marginRight: 10 }} />
-            <SettingsIcon />
-            <Select
-              variant="outlined"
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={currency}
-              style={{ width: 100, height: 40, marginLeft: 15 }}
-              onChange={(e) => setCurrency(e.target.value)}
-            >
-              <MenuItem value="USD">USD</MenuItem>
-              <MenuItem value="NGN">NGN</MenuItem>
-            </Select>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </ThemeProvider>
+    <header className="bg-white border border-stone-200 shadow divide-y divide-stone-200">
+      <div className="py-2 px-8 max-w-7xl mx-auto md:flex items-center justify-between space-x-4 space-y-4 md:space-y-0">
+        <div className="">
+          <Link to="/">
+            <h1 className="text-2xl font-bold text-gray-900">Crypto Tracker</h1>
+          </Link>
+        </div>
+
+        <div id="meals-counter" />
+
+        <form id="submit">
+          <div className="relative text-gray-600 focus-within:text-gray-400">
+            <span className="absolute inset-y-0 left-0 flex items-center pl-2">
+              <button
+                type="submit"
+                className="p-1 focus:outline-none focus:shadow-outline"
+              >
+                <SearchIcon className="h-6 w-6" />
+              </button>
+            </span>
+            <input
+              type="search"
+              id="search"
+              className="w-full md:w-96 py-2 text-sm text-gray-900 rounded-xl pl-10 focus:outline-none focus:bg-white focus:text-gray-900 border-2"
+              placeholder="Find a crypto currency"
+              autoComplete="off"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyUp={handleSubmit}
+            />
+          </div>
+        </form>
+
+        <div className="font-bold text-sm w-20 flex justify-between">
+          <MicrophoneIcon className="h-6 w-6 cursor-pointer" />
+          <CogIcon className="h-6 w-6 cursor-pointer" />
+        </div>
+      </div>
+    </header>
   );
 }
-
-export default Header;
