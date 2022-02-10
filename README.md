@@ -19,7 +19,7 @@ Additional description about the project and its features.
 
 ## Video Demo
 
-[Video Demo](https://www.loom.com/share/86a73ca9798443a2af325321d206d7ab)
+[Video Demo](https://loom.com/share/c3940bcff9ff4c5faab823ddab2d9420)
 ## Live Demo
 
 [Live Demo Link](https://cryptometricmicroverse.netlify.app/)
