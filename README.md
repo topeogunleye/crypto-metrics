@@ -9,8 +9,6 @@ A meal finder app that pulls from TheMealDB API to allow users to search for, vi
 
 ![screenshot](./src/screenshot.png)
 
-Additional description about the project and its features.
-
 ## Built With
 
 - React & Redux
